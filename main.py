@@ -1,11 +1,12 @@
 import time
 from GraphClass import Graph
 
+
 def shortest_path(input_table: dict, start_vertex, end_vertex):
     """Returns a tuple containing the shortest path and total cost
     between start_vertex and end_vertex of a given table. See GraphVisualization.jpg and the table below
     to format the table properly to create a Graph object out of it."""
-    graph = Graph(input_table) # Create a graph object from input_table
+    graph = Graph(input_table)  # Create a graph object from input_table
 
     # Construct a dictionary, with the keys representing the vertices and the values representing a list
     # containing the shortest distance from start_vertex and the previous vertex.
@@ -20,11 +21,11 @@ def shortest_path(input_table: dict, start_vertex, end_vertex):
         # Assume that every vertex is infinitely far away
         table.update({vertex: [0 if vertex == start_vertex else float("inf"), ""]})
 
-    processed = [] # Create a list to store all future processed vertices
+    processed = []  # Create a list to store all future processed vertices
     # A function that calculates the next vertex to process. First, it filters out every vertex that has been processed,
     # and then grabs the vertex with the shortest distance from start_vertex.
     calculate_vertex_to_process = lambda: min(dict(filter(lambda item: item[0] not in processed, table.items())),
-                         key=lambda key: table[key][0])
+                                              key=lambda key: table[key][0])
     # Store the result of the function above in vertex_to_process
     vertex_to_process = calculate_vertex_to_process()
 
@@ -66,6 +67,7 @@ def shortest_path(input_table: dict, start_vertex, end_vertex):
     # Return a tuple of the reversed version of path and the total cost of that shortest path.
     return path[::-1], table[end_vertex][0]
 
+
 # The table defined below matches the visualization shown in GraphVisualization.jpg. Take a look at it for reference
 # for how to properly a Graph object from a table.
 table = {
@@ -79,10 +81,6 @@ table = {
 }
 
 start = time.time()
-print(shortest_path(table, "A", "G")) # Prints out the shortest path and the total cost.
+print(shortest_path(table, "A", "G"))  # Prints out the shortest path and the total cost.
 end = time.time()
-print("Duration:", end-start)
-
-
-
-
+print("Duration:", end - start)
