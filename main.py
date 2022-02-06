@@ -23,9 +23,12 @@ def shortest_path(graph: Graph, start, finish):
     table = []
     for vertex in graph.get_vertices():
         table.append([vertex, 0 if vertex == start else float("inf"), ""])
-    print(table)
     processed = []
-    print(min(table, key=lambda row: row[1]))
+    vertex_to_process = min(table, key=lambda row: row[1])[0]
+    while vertex_to_process != finish:
+        branches = {vertex: cost for vertex, cost in graph.get_branches_from(vertex_to_process).items() if vertex not in processed}
+        print(branches)
+        break
 
 
 
