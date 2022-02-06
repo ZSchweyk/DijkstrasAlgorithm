@@ -20,16 +20,22 @@ class Graph:
         return tuple(self.table.keys())
 
 def shortest_path(graph: Graph, start, finish):
-    table = []
-    for vertex in graph.get_vertices():
-        table.append([vertex, 0 if vertex == start else float("inf"), ""])
+    table = {}
+    for row, vertex in enumerate(graph.get_vertices()):
+        table.update({row: [vertex, 0 if vertex == start else float("inf"), ""]})
+    print(table)
     processed = []
-    vertex_to_process = min(table, key=lambda row: row[1])[0]
-    while vertex_to_process != finish:
-        branches = {vertex: cost for vertex, cost in graph.get_branches_from(vertex_to_process).items() if vertex not in processed}
-        print(branches)
+    # Find the row to process
+    row_to_process = min(dict(filter(lambda item: item[1][0] not in processed, table.items())), key=lambda key: table[key][1])
+    print(row_to_process)
 
-        break
+    while table[row_to_process][0] != finish:
+        branches = {vertex: cost for vertex, cost in graph.get_branches_from(table[row_to_process][0]).items() if vertex not in processed}
+        print(branches)
+        processed.append(table[row_to_process][0])
+        row_to_process = min(dict(filter(lambda item: item[1][0] not in processed, table.items())),
+                             key=lambda key: table[key][1])
+    print("Done")
 
 
 
