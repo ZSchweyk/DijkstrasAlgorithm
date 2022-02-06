@@ -14,6 +14,12 @@ class Node:
         return self.name
 
 
+class Graph:
+    def __init__(self, nodes: list):
+        self.nodes = nodes
+
+
+
 a = Node("A")
 b = Node("B")
 c = Node("C")
