@@ -1,29 +1,5 @@
 import time
-
-# Create a class that converts a dictionary of vertices and costs into an organized Graph object.
-class Graph:
-    def __init__(self, table: dict):
-        """Create a Graph object"""
-        self.table = table
-
-    def get_branches_from(self, letter):
-        """Obtain all the vertices connected to a given node/vertex,"""
-        branches = {}
-        try:
-            first_branch = self.table[letter]
-        except KeyError:
-            raise Exception(f"\"{letter}\" DNE") from None
-        branches.update(first_branch)
-
-        for key, dictionary in self.table.items():
-            if key != letter:
-                if letter in dictionary.keys():
-                    branches.update({key: dictionary[letter]})
-        return branches
-
-    def get_vertices(self):
-        """Grab all the vertices of a Graph."""
-        return tuple(self.table.keys())
+from GraphClass import Graph
 
 def shortest_path(input_table: dict, start_vertex, end_vertex):
     """Returns a tuple containing the shortest path and total cost
@@ -102,7 +78,7 @@ table = {
 }
 
 start = time.time()
-print(shortest_path(table, "A", "G"))
+print(shortest_path(table, "A", "G")) # Prints out the shortest path and the total cost.
 end = time.time()
 print("Duration:", end-start)
 
