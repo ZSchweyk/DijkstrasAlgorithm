@@ -1,3 +1,5 @@
+import time
+
 class Graph:
     def __init__(self, table: dict):
         self.table = table
@@ -64,8 +66,10 @@ table = {
     "G": {}
 }
 
+start = time.time()
 print(shortest_path(table, "A", "G"))
-
+end = time.time()
+print("Duration:", end-start)
 
 
 
