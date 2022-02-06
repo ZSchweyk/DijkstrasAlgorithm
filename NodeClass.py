@@ -1,11 +1,21 @@
 class Node:
-    def __init__(self, name):
-        self.name = name
-        self.branches = {}
+    names = {}
 
-    def cost_to(self, node_obj, cost: float):
-        self.branches[node_obj] = cost
-        node_obj.branches[self] = cost
+    def __init__(self, name):
+        if name not in self.names.keys():
+            self.names[name] = self
+            self.name = name
+            self.branches = {}
+        else:
+            raise Exception(f"\"{name}\" already exists.")
+
+    def cost_to(self, node, cost: float):
+        if isinstance(node, Node):
+            self.branches[node] = cost
+            node.branches[self] = cost
+        elif isinstance(node, str):
+            self.branches[self.names[node]] = cost
+            self.names[node].branches[self] = cost
 
     def get_branches(self):
         return self.branches
@@ -15,9 +25,14 @@ class Node:
 
 
 class Graph:
-    def __init__(self, nodes: list):
-        self.nodes = nodes
+    def __init__(self, nodes: list[Node]):
+        self.nodes = {node.name: node for node in nodes}
 
+    def get_branches_from(self, node_name: str):
+        try:
+            return {node_obj.name: cost for node_obj, cost in self.nodes[node_name].get_branches().items()}
+        except KeyError:
+            raise Exception(f"\"{node_name}\" DNE in the nodes, {self.nodes}, of this Graph object.")
 
 
 a = Node("A")
@@ -45,4 +60,5 @@ e.cost_to(f, 7)
 
 f.cost_to(g, 1)
 
-print(d.get_branches())
+graph = Graph([a, b, c, d, e, f, g])
+print(graph.get_branches_from("E"))
