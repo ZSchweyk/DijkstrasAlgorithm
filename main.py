@@ -28,6 +28,7 @@ def shortest_path(graph: Graph, start, finish):
     while vertex_to_process != finish:
         branches = {vertex: cost for vertex, cost in graph.get_branches_from(vertex_to_process).items() if vertex not in processed}
         print(branches)
+
         break
 
 
