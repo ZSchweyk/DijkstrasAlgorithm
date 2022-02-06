@@ -19,22 +19,23 @@ class Graph:
     def get_vertices(self):
         return tuple(self.table.keys())
 
-def shortest_path(graph: Graph, start_vertex, end_vertex):
+def shortest_path(input_table: dict, start_vertex, end_vertex):
+    graph = Graph(input_table)
     table = {}
     for vertex in graph.get_vertices():
         table.update({vertex: [0 if vertex == start_vertex else float("inf"), ""]})
-    print(table)
+    # print(table)
 
     processed = []
     calculate_vertex_to_process = lambda: min(dict(filter(lambda item: item[0] not in processed, table.items())),
                          key=lambda key: table[key][0])
     vertex_to_process = calculate_vertex_to_process()
-    print(vertex_to_process)
+    # print(vertex_to_process)
 
     while vertex_to_process != end_vertex:
         branches = {vertex: cost for vertex, cost in graph.get_branches_from(vertex_to_process).items() if
                     vertex not in processed}
-        print(branches)
+        # print(branches)
         for vertex, cost in branches.items():
             dist_from_start_vertex = table[vertex_to_process][0] + cost
             if dist_from_start_vertex < table[vertex][0]:
@@ -43,10 +44,14 @@ def shortest_path(graph: Graph, start_vertex, end_vertex):
         processed.append(vertex_to_process)
         vertex_to_process = calculate_vertex_to_process()
 
-    return table
+    path = []
+    looping_vertex = end_vertex
+    path.append(looping_vertex)
+    while looping_vertex != start_vertex:
+        path.append(table[looping_vertex][1])
+        looping_vertex = table[looping_vertex][1]
 
-
-
+    return path[::-1], table[end_vertex][0]
 
 
 table = {
@@ -59,8 +64,7 @@ table = {
     "G": {}
 }
 
-g = Graph(table)
-print(shortest_path(g, "A", "G"))
+print(shortest_path(table, "A", "G"))
 
 
 
