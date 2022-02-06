@@ -1,7 +1,6 @@
 import time
 from GraphClass import Graph
 
-
 def shortest_path(input_table: dict, start_vertex, end_vertex):
     """Returns a tuple containing the shortest path and total cost
     between start_vertex and end_vertex of a given table. See GraphVisualization.jpg and the table below
