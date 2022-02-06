@@ -34,6 +34,7 @@ def shortest_path(input_table: dict, start_vertex, end_vertex):
         # processed.
         branches = {vertex: cost for vertex, cost in graph.get_branches_from(vertex_to_process).items() if
                     vertex not in processed}
+        # print("Processing", vertex_to_process)
         # Loop through each vertex and cost in the branches, and update the table accordingly.
         for vertex, cost in branches.items():
             # Calculate the distance from start_vertex to vertex_to_process
