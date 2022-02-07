@@ -14,7 +14,7 @@ class Node:
             raise Exception(f"\"{name}\" already exists.")
 
     def cost_to(self, node, cost: float):
-        """Accepts the node object or node.name as node, and modifies the branches of self and node accordingly."""
+        """Accepts the node object or node.name as node, and modifies the branch of self accordingly."""
         if isinstance(node, Node):
             self.branches[node] = cost
             # node.branches[self] = cost

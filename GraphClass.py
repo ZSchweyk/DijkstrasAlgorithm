@@ -37,8 +37,8 @@ class Graph:
             table.update({vertex: [0 if vertex == start_vertex else float("inf"), ""]})
 
         processed = []  # Create a list to store all future processed vertices
-        # A function that calculates the next vertex to process. First, it filters out every vertex that has been processed,
-        # and then grabs the vertex with the shortest distance from start_vertex.
+        # A function that calculates the next vertex to process. First, it filters out every vertex that has been
+        # processed, and then grabs the vertex with the shortest distance from start_vertex.
         calculate_vertex_to_process = lambda: min(dict(filter(lambda item: item[0] not in processed, table.items())),
                                                   key=lambda key: table[key][0])
         # Store the result of the function above in vertex_to_process
