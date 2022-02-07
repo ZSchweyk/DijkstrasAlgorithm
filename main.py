@@ -1,6 +1,8 @@
 from NodeClass import Node
 from GraphClass import Graph
 
+# Adjusted the Node and Graph class to account for repetitive table inputs correctly.
+
 a = Node("A")
 b = Node("B")
 c = Node("C")
