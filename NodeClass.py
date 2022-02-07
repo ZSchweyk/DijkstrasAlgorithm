@@ -5,7 +5,6 @@ class Node:
         """
         Constructor.
         Make sure that the name parameter is unique. If not, throw an exception.
-
         """
         if name not in self.names.keys():
             self.names[name] = self
@@ -18,10 +17,10 @@ class Node:
         """Accepts the node object or node.name as node, and modifies the branches of self and node accordingly."""
         if isinstance(node, Node):
             self.branches[node] = cost
-            node.branches[self] = cost
+            # node.branches[self] = cost
         elif isinstance(node, str):
             self.branches[self.names[node]] = cost
-            self.names[node].branches[self] = cost
+            # self.names[node].branches[self] = cost
 
     def get_branches(self):
         """Get the branches of a node."""

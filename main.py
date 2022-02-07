@@ -28,6 +28,8 @@ e.cost_to(f, 7)
 
 f.cost_to(g, 1)
 
+print(e.get_branches())
+
 graph = Graph([a, b, c, d, e, f, g])
-print(graph.shortest_path("F", "G"))
+print(graph.shortest_path("A", "G"))
 
