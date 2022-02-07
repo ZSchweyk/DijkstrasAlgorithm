@@ -46,10 +46,21 @@ class Graph:
 
         # Start looping until the destination vertex is about to be processed
         while vertex_to_process != end_vertex:
+            # print("Vertex to process =", vertex_to_process)
             # Grab all the branches and costs that vertex_to_process has, filtering out all the vertices that have been
             # processed.
             branches = {vertex: cost for vertex, cost in self.get_branches_from(vertex_to_process).items() if
                         vertex not in processed}
+
+            # Deal with node islands; raise an exception if start_vertex and end_vertex are not connected.
+            # If the number of vertex_to_process's branches that haven't been processed is 0, then vertex_to_process is
+            # the last node to process on an island. Since everything else has already been processed, catch this event
+            # and raise an exception.
+            if len(branches) == 0:
+                raise Exception(f"\"{start_vertex}\" & \"{end_vertex}\" aren't connected. Node \"{vertex_to_process}\""
+                                f" can't be processed because it's the last on its island, which contains nodes"
+                                f" {[f'{node}' for node in processed] + [f'{vertex_to_process}']}"
+                                f" and were processed in that respective order.")
 
             # Loop through each vertex and cost in the branches, and update the table accordingly.
             for vertex, cost in branches.items():
@@ -78,6 +89,7 @@ class Graph:
             path.append(table[looping_vertex][1])
             # Update the value of looping_vertex.
             looping_vertex = table[looping_vertex][1]
+
 
         # Return a tuple of the reversed version of path and the total cost of that shortest path.
         return path[::-1], table[end_vertex][0]
