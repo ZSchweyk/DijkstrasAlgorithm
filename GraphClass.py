@@ -1,16 +1,21 @@
 from NodeClass import Node
 
+
 class Graph:
     def __init__(self, nodes: list[Node]):
         self.nodes = {node.name: node for node in nodes}
 
     def get_branches_from(self, node_name: str):
+        """Get all the branches adjacent to a given node.name. This is slightly different than Node's get_branches
+        because the branches attribute has node objects as its keys, whereas this method returns a dict with
+        the names of those node objects as keys."""
         try:
             return {node_obj.name: cost for node_obj, cost in self.nodes[node_name].get_branches().items()}
         except KeyError:
             raise Exception(f"\"{node_name}\" DNE in the nodes, {self.nodes}, of this Graph object.")
 
     def get_vertices(self):
+        """Get all the vertices in the graph."""
         return tuple(self.nodes.keys())
 
     def shortest_path(self, start_vertex, end_vertex):
