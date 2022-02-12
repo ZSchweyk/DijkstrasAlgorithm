@@ -13,25 +13,6 @@ g = Node("G")
 h = Node("H")
 i = Node("I")
 
-# Islands [a, b, c], [d, e, f], [g], [h], [i]
-# a.cost_to(b, 5)
-# a.cost_to(c, 2)
-# c.cost_to(a, 2)
-# c.cost_to(b, 2)
-# b.cost_to(a, 5)
-# b.cost_to(c, 2)
-#
-# e.cost_to(d, 5)
-# e.cost_to(f, 7)
-# f.cost_to(e, 7)
-# f.cost_to(d, 2)
-# d.cost_to(e, 5)
-# d.cost_to(f, 2)
-
-
-
-
-
 a.cost_to(b, 5)
 a.cost_to(c, 2)
 
@@ -58,6 +39,20 @@ f.cost_to(g, 1)
 f.cost_to(d, 2)
 f.cost_to(e, 7)
 
+# Islands [a, b, c], [d, e, f], [g], [h], [i]
+# a.cost_to(b, 5)
+# a.cost_to(c, 2)
+# c.cost_to(a, 2)
+# c.cost_to(b, 2)
+# b.cost_to(a, 5)
+# b.cost_to(c, 2)
+#
+# e.cost_to(d, 5)
+# e.cost_to(f, 7)
+# f.cost_to(e, 7)
+# f.cost_to(d, 2)
+# d.cost_to(e, 5)
+# d.cost_to(f, 2)
 
 graph = Graph([a, b, c, d, e, f, g, h, i])
 print(graph.shortest_path("A", "G"))
