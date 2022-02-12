@@ -1,5 +1,6 @@
 class Node:
     names = {}
+    bi_directional = False
 
     def __init__(self, name):
         """
@@ -17,10 +18,10 @@ class Node:
         """Accepts the node object or node.name as node, and modifies the branch of self accordingly."""
         if isinstance(node, Node):
             self.branches[node] = cost
-            # node.branches[self] = cost
+            if self.bi_directional: node.branches[self] = cost
         elif isinstance(node, str):
             self.branches[self.names[node]] = cost
-            # self.names[node].branches[self] = cost
+            if self.bi_directional: self.names[node].branches[self] = cost
 
     def get_branches(self):
         """Get the branches of a node."""
