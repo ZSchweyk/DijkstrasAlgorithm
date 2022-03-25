@@ -45,6 +45,6 @@ u_penn.cost_to(brown, 4.65)
 u_penn.cost_to(university_of_rochester, 5.5667)
 brown.cost_to(university_of_rochester, 6.2667)
 
-graph = Graph([harvard, princeton, yale, johns_hopkins, cornell, u_penn, brown])
-print(graph.shortest_path("University of Rochester", "University of Rochester"))
+graph = Graph([harvard, princeton, yale, johns_hopkins, cornell, u_penn, brown, university_of_rochester])
+print(graph.shortest_path("Yale", "Harvard"))
 
